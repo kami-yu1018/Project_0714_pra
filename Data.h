@@ -26,3 +26,15 @@ struct EnemyData
 	Element element;
 	
 };
+
+struct PlayerData
+{
+	const char name[256];
+	int ID;
+	int HP;
+	int ATK;
+	int DEF;
+	int SPD;
+	float CriticalRate;
+	Element element;
+};
