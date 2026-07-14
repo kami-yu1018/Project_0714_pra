@@ -3,6 +3,13 @@
 #include<DxLib.h>
 #include"Data.h"
 
+enum
+{
+	Scene_Title,
+	Scene_Play,
+	Scene_End,
+};
+
 class Game
 {
 private:
