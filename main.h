@@ -1,6 +1,6 @@
 #pragma once
 
-#include<iostream>
+#include<DxLib.h>
 #include"Data.h"
 
 class Game
