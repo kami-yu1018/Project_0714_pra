@@ -1,7 +1,7 @@
 #pragma once
 
-#include<DxLib.h>
 #include"Data.h"
+#include <iostream>
 
 enum
 {
