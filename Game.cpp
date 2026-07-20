@@ -23,3 +23,9 @@ void Scene_Game::Init()
 	}
 
 }
+
+void Scene_Game::Update()
+{
+	//	–¡•û‚ÌƒRƒ}ƒ“ƒh
+
+}

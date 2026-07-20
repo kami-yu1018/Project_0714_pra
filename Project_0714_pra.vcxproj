@@ -140,6 +140,7 @@
     <ClInclude Include="Factory.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="math.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Title.h" />
   </ItemGroup>
