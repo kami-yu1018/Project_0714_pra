@@ -27,5 +27,8 @@ void Scene_Game::Init()
 void Scene_Game::Update()
 {
 	//	–¡•û‚ÌƒRƒ}ƒ“ƒh
+	for (int i = 0; i < 4; ++i)
+	{
 
+	}
 }

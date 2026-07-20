@@ -30,7 +30,7 @@ const PlayerData PlayerFactory::PlayerTable[] = {
 	{"Œ•m", 1, 28,12,8,3,0.03,Element::None},
 	{"–‚“±m", 2 ,18, 16,3,2,0.03,Element::None},
 	{"Œ«Ò",3,24,11,6,2,0.01,Element::Light},
-	{"“‘¯",4,22,10,5,5,Element::Wind}
+	{"“‘¯",4,22,10,5,5, 0.05,Element::Wind}
 };
 
 const int PlayerFactory::PlayerTableSize = sizeof(PlayerTable) / sizeof(PlayerData);
