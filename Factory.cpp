@@ -39,7 +39,11 @@ Player* PlayerFactory::CreatePlayer(int ID)
 {
 	for (int i = 0; i < PlayerTableSize; ++i)
 	{
-		return new Player(PlayerTable[i]);
+
+		if(PlayerTable[i].ID==ID)
+		{
+			return new Player(PlayerTable[i]);
+		}
 	}
 	return nullptr;
 }

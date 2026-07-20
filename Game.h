@@ -3,6 +3,7 @@
 #include "Factory.h"
 #include "Player.h"
 #include "Enemy.h"
+#include <iostream>
 
 class Scene_Game
 {

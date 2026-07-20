@@ -20,6 +20,7 @@ private:
 	int scene = Scene_Title;
 	Title title;
 	Scene_Game game;
+	int init = 0;
 
 public:
 	Game(const Game&) = delete;

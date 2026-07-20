@@ -2,12 +2,8 @@
 
 int Title::Update()
 {
-	int ch;
-	ch = _getche();
+	const int key = _getch();
 
-	if (ch == ' ')
-	{
-		return 1;
-	}
-	return 0;
+	// Space キーならゲームシーンへ進む合図として 1 を返す。
+	return key == ' ' ? 1 : 0;
 }
