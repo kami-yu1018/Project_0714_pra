@@ -3,6 +3,8 @@
 #include"Data.h"
 #include <iostream>
 #include <conio.h>
+#include "Title.h"
+#include "Game.h"
 
 enum
 {
@@ -16,6 +18,9 @@ class Game
 private:
 	Game() {};
 	int scene = Scene_Title;
+	Title title;
+	Scene_Game game;
+
 public:
 	Game(const Game&) = delete;
 	Game& operator=(const Game&) = delete;

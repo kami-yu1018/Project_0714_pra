@@ -5,6 +5,10 @@ void Game::GameLoop()
 	switch (scene)
 	{
 	case Scene_Title:
+		if (title.Update() == 1)
+		{
+			scene = Scene_Play;
+		}
 		break;
 	case Scene_Play:
 		break;

@@ -1,6 +1,6 @@
-#include "main.h"
+#include "Title.h"
 
-int Title()
+int Title::Update()
 {
 	int ch;
 	ch = _getche();

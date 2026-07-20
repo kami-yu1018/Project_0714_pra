@@ -6,16 +6,22 @@
 
 class Scene_Game
 {
-	Enemy* enemy[3];
-	Player* player[4];
+	Enemy* enemy[3] = {};
+	Player* player[4] = {};
 
 
 public:
-	Game() {};
-	~Game()
+	Scene_Game() {};
+	~Scene_Game()
 	{
-		delete enemy;
-		delete player;
+		for (Enemy*& value : enemy)
+		{
+			delete value;
+		}
+		for (Player*& value : player)
+		{
+			delete value;
+		}
 	};
 
 	void Init();
