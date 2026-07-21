@@ -30,16 +30,19 @@ void Scene_Game::Update()
 	//	味方のコマンド
 	for (int i = 0; i < 4; ++i)
 	{
-
 		std::cout << player[i]->Data.name << "はどうする？\n";
 		std::cout << "１：攻撃　２：防御　３：スキル\n";
 		const int command = _getch();
+		//	通常攻撃
 		if (command == '1')
 		{
+			//	テキスト
 			std::cout << "ターゲットを選択してください" << std::endl;
 			std::cout << "１：" << enemy[0]->Data.name <<
 				"　２：" << enemy[1]->Data.name <<
 				"　３：" << enemy[2]->Data.name << std::endl;
+
+			//	ターゲット選択
 			const int target = _getch();
 			int tag;
 			if (target == '1')
@@ -54,6 +57,8 @@ void Scene_Game::Update()
 			{
 				tag = 2;
 			}
+
+			//	ダメージ計算＆クリティカル率計算
 			DamageResult result = CalculateDamage(
 				player[i]->Data.ATK,
 				player[i]->Data.CriticalRate,
@@ -61,6 +66,7 @@ void Scene_Game::Update()
 
 			enemy[tag]->Data.HP -= result.damage;
 			
+			//	テキスト
 			std::cout << player[i]->Data.name << "の攻撃！\n";
 			if (result.isCritical)
 			{
@@ -69,20 +75,24 @@ void Scene_Game::Update()
 			std::cout << enemy[tag]->Data.name << "に" << result.damage << "ダメージ！\n";
 			std::cout << "\n";
 		}
+		//	防御
 		else if (command == '2')
 		{
+			//	防禦態勢でそのターンの防御力を1.5倍に
 			player[i]->Data.DEF *= 1.5;
 
+			//	テキスト
 			std::cout << player[i]->Data.DEF << "は防御態勢を取った！\n";
 			std::cout << "\n";
 		}
+		//	スキル
 		else if (command == '3')
 		{
 			switch (i)
 			{
-			case 0:
-
+			case 0:		//	剣士
 			{
+				//	全体攻撃
 				std::cout << player[i]->Data.name << "の必殺斬！\n";
 				for (int i = 0; i < 3; ++i)
 				{
@@ -102,9 +112,10 @@ void Scene_Game::Update()
 				break;
 			}
 
-			case 1:
-
+			case 1:		//	魔法使い
 			{
+				//	火力の高い単体攻撃
+
 				std::cout << "ターゲットを選択してください" << std::endl;
 				std::cout << "１：" << enemy[0]->Data.name <<
 					"　２：" << enemy[1]->Data.name <<
@@ -140,8 +151,10 @@ void Scene_Game::Update()
 				break;
 			}
 
-			case 2:
+			case 2:		//	賢者
 			{
+				//	選択した味方の体力を回復
+
 				std::cout << "ターゲットを選択してください" << std::endl;
 				std::cout << "１：" << player[0]->Data.name <<
 					"　２：" << player[1]->Data.name <<
@@ -177,9 +190,11 @@ void Scene_Game::Update()
 
 				break;
 			}
-			case 3:
+
+			case 3:		//	盗賊
 				{
 					std::cout << player[i]->Data.name << "の盗賊乱舞！\n";
+
 					//	ランダムに4回攻撃
 					for (int atk = 0; atk < 4; ++atk)
 					{
@@ -200,5 +215,21 @@ void Scene_Game::Update()
 
 			}
 		}
+	}
+
+	//	敵の攻撃
+	for (int i = 0; i < 3; ++i)
+	{
+		std::cout << enemy[i]->Data.name << "の攻撃！\n";
+		const int tag = rand() % 4;
+		DamageResult result = CalculateDamage(
+			enemy[i]->Data.ATK,
+			enemy[i]->Data.CriticalRate,
+			player[tag]->Data.DEF);
+
+		player[tag]->Data.HP -= result.damage;
+
+		std::cout << player[tag]->Data.name << "に" << result.damage << "ダメージ！\n";
+		std::cout << "\n";
 	}
 }
