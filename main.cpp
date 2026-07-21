@@ -8,7 +8,6 @@ void Game::GameLoop()
 		if (title.Update() == 1)
 		{
 			scene = Scene_Play;
-			init = 1;
 		}
 		break;
 	case Scene_Play:
@@ -37,10 +36,11 @@ void Game::GameLoop()
 			std::cout << "Push Space to title.\n";
 			std::cout << "\n";
 		}
-		const int key = _getch();
+		const int key = ReadValidKey(" ");
 		if (key == ' ')
 		{
 			scene = Scene_Title;
+			init = 0;
 		}
 
 		break;

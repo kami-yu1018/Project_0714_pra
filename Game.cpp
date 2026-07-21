@@ -13,6 +13,7 @@ void Scene_Game::Init()
 	{
 		enemy[i] = EnemyFactory::CreateEnemy(i + 1);
 		std::cout << enemy[i]->Data.name << "が表れた！\n";
+		e_alive[i] = 1;
 	}
 	std::cout << std::endl;
 	//	プレイヤーの生成
@@ -20,6 +21,7 @@ void Scene_Game::Init()
 	{
 		player[i] = PlayerFactory::CreatePlayer(i + 1);
 		std::cout << player[i]->Data.name << "の登場！\n";
+		p_alive[i] = 1;
 	}
 
 	std::cout << "\n";
@@ -35,7 +37,7 @@ void Scene_Game::Update()
 		{
 			std::cout << player[i]->Data.name << "はどうする？\n";
 			std::cout << "１：攻撃　２：防御　３：スキル\n";
-			const int command = _getch();
+			const int command = ReadValidKey("123");
 			//	通常攻撃
 			if (command == '1')
 			{
@@ -46,7 +48,7 @@ void Scene_Game::Update()
 					"　３：" << enemy[2]->Data.name << std::endl;
 
 				//	ターゲット選択
-				const int target = _getch();
+				const int target = ReadValidKey("123");
 				int tag;
 				if (target == '1')
 				{
@@ -97,19 +99,19 @@ void Scene_Game::Update()
 				{
 					//	全体攻撃
 					std::cout << player[i]->Data.name << "の必殺斬！\n";
-					for (int i = 0; i < 3; ++i)
+					for (int ene = 0; ene < 3; ++ene)
 					{
 						DamageResult result = CalculateDamage(
 							player[i]->Data.ATK,
 							player[i]->Data.CriticalRate,
-							enemy[i]->Data.DEF);
+							enemy[ene]->Data.DEF);
 
-						enemy[i]->Data.HP -= result.damage;
+						enemy[ene]->Data.HP -= result.damage;
 						if (result.isCritical)
 						{
 							std::cout << "クリティカルヒット！\n";
 						}
-						std::cout << enemy[i]->Data.name << "に" << result.damage << "ダメージ！\n";
+						std::cout << enemy[ene]->Data.name << "に" << result.damage << "ダメージ！\n";
 					}
 					std::cout << "\n";
 					break;
@@ -123,7 +125,7 @@ void Scene_Game::Update()
 					std::cout << "１：" << enemy[0]->Data.name <<
 						"　２：" << enemy[1]->Data.name <<
 						"　３：" << enemy[2]->Data.name << std::endl;
-					const int target_2 = _getch();
+					const int target_2 = ReadValidKey("123");
 					int tag;
 					if (target_2 == '1')
 					{
@@ -163,7 +165,7 @@ void Scene_Game::Update()
 						"　２：" << player[1]->Data.name <<
 						"　３：" << player[2]->Data.name <<
 						"　４：" << player[3]->Data.name << std::endl;
-					const int target_3 = _getch();
+					const int target_3 = ReadValidKey("1234");
 					int tag;
 					if (target_3 == '1')
 					{
@@ -251,6 +253,12 @@ void Scene_Game::Update()
 
 			std::cout << player[tag]->Data.name << "に" << result.damage << "ダメージ！\n";
 			std::cout << "\n";
+
+			if (player[tag]->Data.HP <= 0)
+			{
+				p_alive[tag] = false;
+				std::cout << player[tag]->Data.name << "は倒れた！";
+			}
 		}
 		else
 		{
@@ -269,4 +277,6 @@ int Scene_Game::Exit()
 	{
 		return 2;
 	}
+
+	return 0;
 }

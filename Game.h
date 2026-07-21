@@ -6,6 +6,7 @@
 #include <iostream>
 #include <conio.h>
 #include "math.h"
+#include "Key.h"
 
 class Scene_Game
 {
