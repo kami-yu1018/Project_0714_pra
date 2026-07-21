@@ -3,6 +3,7 @@
 #include"Data.h"
 #include <iostream>
 #include <conio.h>
+#include <time.h>
 #include "Title.h"
 #include "Game.h"
 

@@ -4,7 +4,7 @@
 
 struct DamageResult
 {
-	int damate;			//	与えたダメージの値
+	int damage;			//	与えたダメージの値
 	bool isCritical;	//	クリティカルが出たかどうか
 };
 

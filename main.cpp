@@ -25,6 +25,7 @@ void Game::GameLoop()
 
 int main()
 {
+	srand((unsigned int)time(NULL));
 
 	while (1)
 	{

@@ -22,6 +22,7 @@ void Scene_Game::Init()
 		std::cout << player[i]->Data.name << "の登場！\n";
 	}
 
+	std::cout << "\n";
 }
 
 void Scene_Game::Update()
@@ -43,35 +44,37 @@ void Scene_Game::Update()
 			int tag;
 			if (target == '1')
 			{
-				tag = 1;
+				tag = 0;
 			}
 			else if (target == '2')
 			{
-				tag = 2;
+				tag = 1;
 			}
 			else if (target == '3')
 			{
-				tag = 3;
+				tag = 2;
 			}
 			DamageResult result = CalculateDamage(
 				player[i]->Data.ATK,
 				player[i]->Data.CriticalRate,
 				enemy[tag]->Data.DEF);
 
-			enemy[tag]->Data.HP -= result.damate;
+			enemy[tag]->Data.HP -= result.damage;
 			
 			std::cout << player[i]->Data.name << "の攻撃！\n";
 			if (result.isCritical)
 			{
-				std::cout << "クリティカルヒット！";
+				std::cout << "クリティカルヒット！\n";
 			}
-			std::cout << enemy[tag]->Data.name << "に" << result.damate << "ダメージ！";
+			std::cout << enemy[tag]->Data.name << "に" << result.damage << "ダメージ！\n";
+			std::cout << "\n";
 		}
 		else if (command == '2')
 		{
 			player[i]->Data.DEF *= 1.5;
 
-			std::cout << player[i]->Data.DEF << "は防御態勢を取った！";
+			std::cout << player[i]->Data.DEF << "は防御態勢を取った！\n";
+			std::cout << "\n";
 		}
 		else if (command == '3')
 		{
@@ -88,13 +91,14 @@ void Scene_Game::Update()
 						player[i]->Data.CriticalRate,
 						enemy[i]->Data.DEF);
 
-					enemy[i]->Data.HP -= result.damate;
+					enemy[i]->Data.HP -= result.damage;
 					if (result.isCritical)
 					{
-						std::cout << "クリティカルヒット！";
+						std::cout << "クリティカルヒット！\n";
 					}
-					std::cout << enemy[i]->Data.name << "に" << result.damate << "ダメージ！";
+					std::cout << enemy[i]->Data.name << "に" << result.damage << "ダメージ！\n";
 				}
+				std::cout << "\n";
 				break;
 			}
 
@@ -109,18 +113,18 @@ void Scene_Game::Update()
 				int tag;
 				if (target_2 == '1')
 				{
-					tag = 1;
+					tag = 0;
 				}
 				else if (target_2 == '2')
 				{
-					tag = 2;
+					tag = 1;
 				}
 				else if (target_2 == '3')
 				{
-					tag = 3;
+					tag = 2;
 				}
 
-				std::cout << player[i]->Data.name << "のファイアボール！";
+				std::cout << player[i]->Data.name << "のファイアボール！\n";
 				player[i]->Data.ATK *= 1.5;
 
 				DamageResult result = CalculateDamage(
@@ -128,7 +132,10 @@ void Scene_Game::Update()
 					player[i]->Data.CriticalRate,
 					enemy[tag]->Data.DEF);
 
-				enemy[tag]->Data.HP -= result.damate;
+				enemy[tag]->Data.HP -= result.damage;
+
+				std::cout << enemy[tag]->Data.name << "に" << result.damage << "ダメージ！\n";
+				std::cout << "\n";
 
 				break;
 			}
@@ -144,19 +151,19 @@ void Scene_Game::Update()
 				int tag;
 				if (target_3 == '1')
 				{
-					tag = 1;
+					tag = 0;
 				}
 				else if (target_3 == '2')
 				{
-					tag = 2;
+					tag = 1;
 				}
 				else if (target_3 == '3')
 				{
-					tag = 3;
+					tag = 2;
 				}
 				else if (target_3 == '4')
 				{
-					tag = 4;
+					tag = 3;
 				}
 				else
 				{
@@ -164,13 +171,33 @@ void Scene_Game::Update()
 				}
 
 				player[tag]->Data.HP += player[i]->Data.DEF * 2;
-				std::cout << player[i]->Data.name << "のヒール！";
-				std::cout << player[tag]->Data.name << "のＨＰが" << player[i]->Data.DEF * 2 << "回復！";
-			}
+				std::cout << player[i]->Data.name << "のヒール！\n";
+				std::cout << player[tag]->Data.name << "のＨＰが" << player[i]->Data.DEF * 2 << "回復！\n";
+				std::cout << "\n";
 
 				break;
+			}
 			case 3:
-				break;
+				{
+					std::cout << player[i]->Data.name << "の盗賊乱舞！\n";
+					//	ランダムに4回攻撃
+					for (int atk = 0; atk < 4; ++atk)
+					{
+						const int tag = rand() % 3;
+						DamageResult result = CalculateDamage(
+							player[i]->Data.ATK,
+							player[i]->Data.CriticalRate,
+							enemy[tag]->Data.DEF);
+
+						enemy[tag]->Data.HP -= result.damage;
+
+						std::cout << enemy[tag]->Data.name << "に" << result.damage << "ダメージ！\n";
+					}
+					std::cout << "\n";
+
+					break;
+				}
+
 			}
 		}
 	}
