@@ -16,6 +16,7 @@ void Game::GameLoop()
 			game.Init();
 			init++;
 		}
+		game.Update();
 		break;
 	case Scene_End:
 		break;
@@ -24,9 +25,6 @@ void Game::GameLoop()
 
 int main()
 {
-	EnemyData slime = { "slime",1,50,50,20,10,10,10,3,None };
-
-	std::cout << sizeof(slime) << std::endl;
 
 	while (1)
 	{

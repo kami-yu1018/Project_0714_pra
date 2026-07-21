@@ -18,4 +18,6 @@ class PlayerFactory
 	static const int PlayerTableSize;
 public:
 	static Player* CreatePlayer(int ID);
+
+	static const PlayerData ResetData[];
 };

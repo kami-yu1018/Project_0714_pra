@@ -4,6 +4,8 @@
 #include "Player.h"
 #include "Enemy.h"
 #include <iostream>
+#include <conio.h>
+#include "math.h"
 
 class Scene_Game
 {
