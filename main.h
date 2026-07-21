@@ -19,9 +19,12 @@ class Game
 private:
 	Game() {};
 	int scene = Scene_Title;
+
 	Title title;
 	Scene_Game game;
+
 	int init = 0;
+	int game_endhing = 0;
 
 public:
 	Game(const Game&) = delete;

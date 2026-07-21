@@ -10,7 +10,9 @@
 class Scene_Game
 {
 	Enemy* enemy[3] = {};
+	bool e_alive[3] = { 1,1,1 };
 	Player* player[4] = {};
+	bool p_alive[4] = { 1,1,1,1 };
 
 
 public:
@@ -29,5 +31,5 @@ public:
 
 	void Init();
 	void Update();
-	void Exit();
+	int Exit();
 };
