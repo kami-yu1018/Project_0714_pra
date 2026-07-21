@@ -8,12 +8,13 @@
 // ---------------------------------------------------------
 void Scene_Game::Init()
 {
+	Reset();
+
 	//	敵の生成
 	for (int i = 0; i < 3; ++i)
 	{
 		enemy[i] = EnemyFactory::CreateEnemy(i + 1);
 		std::cout << enemy[i]->Data.name << "が表れた！\n";
-		e_alive[i] = 1;
 	}
 	std::cout << std::endl;
 	//	プレイヤーの生成
@@ -21,7 +22,6 @@ void Scene_Game::Init()
 	{
 		player[i] = PlayerFactory::CreatePlayer(i + 1);
 		std::cout << player[i]->Data.name << "の登場！\n";
-		p_alive[i] = 1;
 	}
 
 	std::cout << "\n";
@@ -87,7 +87,7 @@ void Scene_Game::Update()
 				player[i]->Data.DEF *= 1.5;
 
 				//	テキスト
-				std::cout << player[i]->Data.DEF << "は防御態勢を取った！\n";
+				std::cout << player[i]->Data.name << "は防御態勢を取った！\n";
 				std::cout << "\n";
 			}
 			//	スキル
@@ -230,6 +230,11 @@ void Scene_Game::Update()
 					std::cout << "\n";
 				}
 			}
+
+			if (e_alive[0] == 0 && e_alive[1] == 0 && e_alive[2] == 0)
+			{
+				break;
+			}
 		}
 		else
 		{
@@ -279,4 +284,21 @@ int Scene_Game::Exit()
 	}
 
 	return 0;
+}
+
+//	前回の処理をリセット
+void Scene_Game::Reset()
+{
+	for (int i = 0; i < 3; ++i)
+	{
+		delete enemy[i];
+		enemy[i] = nullptr;
+		e_alive[i] = true;
+	}
+	for (int i = 0; i < 4; ++i)
+	{
+		delete player[i];
+		player[i] = nullptr;
+		p_alive[i] = true;
+	}
 }

@@ -20,17 +20,11 @@ public:
 	Scene_Game() {};
 	~Scene_Game()
 	{
-		for (Enemy*& value : enemy)
-		{
-			delete value;
-		}
-		for (Player*& value : player)
-		{
-			delete value;
-		}
+		Reset();
 	};
 
 	void Init();
 	void Update();
 	int Exit();
+	void Reset();
 };
